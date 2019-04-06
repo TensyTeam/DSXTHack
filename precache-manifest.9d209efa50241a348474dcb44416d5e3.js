@@ -8,19 +8,19 @@ self.__precacheManifest = [
     "url": "/DSXTHack/static/js/runtime~main.bf7705b1.js"
   },
   {
-    "revision": "7159a75dc59afe60bc56",
-    "url": "/DSXTHack/static/js/main.021ebb38.chunk.js"
+    "revision": "ec3e69adfaeecffb2518",
+    "url": "/DSXTHack/static/js/main.63e854ec.chunk.js"
   },
   {
     "revision": "94956a88f3d4f5f5993f",
     "url": "/DSXTHack/static/js/2.04e06ae7.chunk.js"
   },
   {
-    "revision": "7159a75dc59afe60bc56",
+    "revision": "ec3e69adfaeecffb2518",
     "url": "/DSXTHack/static/css/main.bd853ecc.chunk.css"
   },
   {
-    "revision": "ac9e08e7f803be73cec60051eecc19f9",
+    "revision": "4c1f5ec29ceaf1eb0072f6900a496a1a",
     "url": "/DSXTHack/index.html"
   }
 ];

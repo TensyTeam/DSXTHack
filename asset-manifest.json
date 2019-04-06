@@ -1,14 +1,14 @@
 {
-  "main.css": "/DSXTHack/static/css/main.4a0daf38.chunk.css",
-  "main.js": "/DSXTHack/static/js/main.f33c3f6f.chunk.js",
-  "main.js.map": "/DSXTHack/static/js/main.f33c3f6f.chunk.js.map",
+  "main.css": "/DSXTHack/static/css/main.bd853ecc.chunk.css",
+  "main.js": "/DSXTHack/static/js/main.9f925c30.chunk.js",
+  "main.js.map": "/DSXTHack/static/js/main.9f925c30.chunk.js.map",
   "runtime~main.js": "/DSXTHack/static/js/runtime~main.bf7705b1.js",
   "runtime~main.js.map": "/DSXTHack/static/js/runtime~main.bf7705b1.js.map",
-  "static/js/2.6efc73d3.chunk.js": "/DSXTHack/static/js/2.6efc73d3.chunk.js",
-  "static/js/2.6efc73d3.chunk.js.map": "/DSXTHack/static/js/2.6efc73d3.chunk.js.map",
+  "static/js/2.65aa1cca.chunk.js": "/DSXTHack/static/js/2.65aa1cca.chunk.js",
+  "static/js/2.65aa1cca.chunk.js.map": "/DSXTHack/static/js/2.65aa1cca.chunk.js.map",
   "index.html": "/DSXTHack/index.html",
-  "precache-manifest.cc5823884685e6134380e99396250220.js": "/DSXTHack/precache-manifest.cc5823884685e6134380e99396250220.js",
+  "precache-manifest.7036c468f5a36379110d8a5d5620ad7a.js": "/DSXTHack/precache-manifest.7036c468f5a36379110d8a5d5620ad7a.js",
   "service-worker.js": "/DSXTHack/service-worker.js",
-  "static/css/main.4a0daf38.chunk.css.map": "/DSXTHack/static/css/main.4a0daf38.chunk.css.map",
-  "static/media/logo.svg": "/DSXTHack/static/media/logo.5d5d9eef.svg"
+  "static/css/main.bd853ecc.chunk.css.map": "/DSXTHack/static/css/main.bd853ecc.chunk.css.map",
+  "static/media/style.css": "/DSXTHack/static/media/logo.049c702e.png"
 }

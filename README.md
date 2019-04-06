@@ -1,2 +1,5 @@
 # DSXTHack
-DSXT blockchain hackathon
+
+### DSXT blockchain hackathon
+
+Open web-app: https://mike-petrov.github.io/DSXTHack/

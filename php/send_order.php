@@ -26,7 +26,7 @@
         $data = mysqli_fetch_array($query);
 
         if($type === 'buy') {
-            $query = mysqli_query($connect, "SELECT `id`, `price` WHERE `show` = 'true' AND `type` = 'sell' AND `name` = '$name' ORDER BY `price` DESC");
+            $query = mysqli_query($connect, "SELECT `id`, `price` FROM `orders` WHERE `show` = 'true' AND `type` = 'sell' AND `name` = '$name' ORDER BY `price` DESC");
             $data_check = mysqli_fetch_array($query);
             if($price <= $data_check[price]) {
                 $id_taker = $data_check['id'];
@@ -34,7 +34,7 @@
         }
 
         if($type === 'sell') {
-            $query = mysqli_query($connect, "SELECT `id`, `price` WHERE `show` = 'true' AND `type` = 'buy' AND `name` = '$name' ORDER BY `price`");
+            $query = mysqli_query($connect, "SELECT `id`, `price` FROM `orders` WHERE `show` = 'true' AND `type` = 'buy' AND `name` = '$name' ORDER BY `price`");
             $data_check = mysqli_fetch_array($query);
             if($price < $data_check[price]) {
                 $id_taker = $data_check['id'];

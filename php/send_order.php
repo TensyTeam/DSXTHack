@@ -18,7 +18,7 @@
         mysqli_set_charset($connect, "utf8");
 
         //insert info
-        $query = mysqli_query($connect, "INSERT INTO `orders` (`id`, `date`, `time`, `name`, `quantity`, `price`, `type`) VALUES (NULL, '$date', '$time', '$name', '$quantity', '$price', '$type')");
+        $query = mysqli_query($connect, "INSERT INTO `orders` (`id`, `date`, `time`, `name`, `quantity`, `price`, `type`, `show`) VALUES (NULL, '$date', '$time', '$name', '$quantity', '$price', '$type', 'false')");
 
         //get id order
         $query = mysqli_query($connect, "SELECT `id` FROM `orders` ORDER BY `id` DESC");

@@ -13,16 +13,18 @@ class App extends React.Component {
 		this.state = {
 			arrayOrders: null,
             data: null,
-            name: null,
+            name: 'usd',
             quantity: null,
             price: null,
-            type: null
+            type: 'buy'
 		};
 		this.onSendOrder = this.onSendOrder.bind(this);
 	}
 
     onSendOrder() {
-		this.setState({ data: serverResponse(sendOrder(this.state.name, this.state.quantity, this.state.price, this.state.type)) });
+        if(this.state.quantity !== null && this.state.price !== null){
+    		this.setState({ data: serverResponse(sendOrder(this.state.name, this.state.quantity, this.state.price, this.state.type)) });
+        }
 	}
 
     componentWillMount() {
@@ -37,7 +39,7 @@ class App extends React.Component {
         let chart1 = am4core.create("chartdiv1", am4charts.XYChart);
         chart1.paddingRight = 20;
 
-        chart1.data = generateChartData(this.state.arrayOrders);
+        chart1.data = generateChartData(this.state.arrayOrders[0]);
 
         let dateAxis = chart1.xAxes.push(new am4charts.DateAxis());
         dateAxis.baseInterval = {
@@ -91,19 +93,49 @@ class App extends React.Component {
             }
             return chartData;
         }
-        var data = [];
 
-        for (let i = 0; i < this.state.arrayOrders.length; i++) {
-          let value = this.state.arrayOrders[i].price;
-          let qua = this.state.arrayOrders[i].quantity;
-          data.push({ value: qua, category: value });
+        //chart 2
+        var data = [];
+        var n1 = this.state.arrayOrders[1].length;
+        var n2 = this.state.arrayOrders[2].length;
+
+        for (let i = 0; i < n1; i++) {
+          let price = Number(this.state.arrayOrders[1][i].price);
+          let quantity = Number(this.state.arrayOrders[1][i].quantity);
+          if(data.length > 0 && price == data[data.length-1].category) {
+              data[data.length-1].value += quantity
+          } else
+            data.push({ value: quantity, category: price });
+        }
+
+        var j = data.length-1;
+        n1 = data.length;
+
+        for (let i = 0; i < n2; i++) {
+          let value = Number(this.state.arrayOrders[2][i].price);
+          let qua = Number(this.state.arrayOrders[2][i].quantity);
+
+          while(j >= 0 && value >= data[j].category){
+            j--;
+          }
+          if(j < 0)
+            j = 0;
+          while(j < n1 && value <= data[j].category){
+            j++;
+          }
+          if(j > 0 && data[j-1].category == value){
+              data.push({ value: data[j-1].value - qua, category: value });
+          }
+          else{
+              data.push({ value: -qua, category: value });
+          }
         }
 
         let interfaceColors = new am4core.InterfaceColorSet();
 
         let chart2 = am4core.create("chartdiv2", am4charts.XYChart);
 
-        chart2.data = data;
+        // chart2.data = data;
         chart2.bottomAxesContainer.layout = "horizontal";
         chart2.bottomAxesContainer.reverseOrder = true;
 
@@ -123,11 +155,21 @@ class App extends React.Component {
         valueAxis2.renderer.grid.template.stroke = interfaceColors.getFor("background");
         valueAxis2.renderer.grid.template.strokeOpacity = 1;
 
+        chart2.colors.list = [
+            am4core.color("#000")
+        ];
+
+
         let series2 = chart2.series.push(new am4charts.ColumnSeries());
         series2.dataFields.categoryY = "category";
         series2.dataFields.valueX = "value";
         series2.xAxis = valueAxis2;
         series2.name = "Series";
+                series2.data = data;
+
+        // series2.stroke = am4core.color("{valueX.value}");
+        // series2.columns.template.fill = am4core.color("#00ff00");
+
         let bullet = series2.bullets.push(new am4charts.CircleBullet());
         bullet.fillOpacity = 0;
         bullet.strokeOpacity = 0;
@@ -149,10 +191,17 @@ class App extends React.Component {
                     <div className="title gradient gradient_cold">{this.state.data !== null ? 'Оффер номер: ' + this.state.data : 'Buy / sell'}</div>
                     <div className="bottom">
                         <div className="form">
-                            <input className="input" type="text" name="name" placeholder="Наименование" onChange={(e)=>{this.setState({ name: e.target.value })}}/>
-                            <input className="input" type="number" name="quantity" placeholder="Количество" onChange={(e)=>{this.setState({ quantity: e.target.value })}}/>
-                            <input className="input" type="number" name="price" placeholder="Цена" onChange={(e)=>{this.setState({ price: e.target.value })}}/>
-                            <input className="input" type="text" name="type" placeholder="Тип" onChange={(e)=>{this.setState({ type: e.target.value })}}/>
+                            <select className="input" type="text" defaultValue="usd" name="name" placeholder="Наименование" onChange={(e)=>{this.setState({ name: e.target.value })}}>
+                                <option value="usd">Доллар</option>
+                                <option value="eur">Евро</option>
+                                <option value="btc">Биткоин</option>
+                            </select>
+                            <input className="input" type="number" name="quantity" placeholder="Количество" onChange={(e)=>{this.setState({ quantity: e.target.value })}} required />
+                            <input className="input" type="number" name="price" placeholder="Цена" onChange={(e)=>{this.setState({ price: e.target.value })}} required />
+                            <select className="input" type="text" defaultValue="buy" name="type" placeholder="Тип" onChange={(e)=>{this.setState({ type: e.target.value })}}>
+                                <option value="buy">Купить</option>
+                                <option value="sell">Продать</option>
+                            </select>
                             <button className="btn" onClick={()=>{this.onSendOrder()}}>Отправить</button>
                         </div>
                     </div>

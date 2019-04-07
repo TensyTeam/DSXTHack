@@ -50,12 +50,12 @@ html {
     stroke: #2fe8ff;
 }
 
-[role=menuitem] {
+/* [role=menuitem] {
     stroke-opacity: 1;
-    fill: #2fe8ff;
+    fill: #2ecc71;
     fill-opacity: 1;
-    stroke: #2fe8ff;
-}
+    stroke: #2ecc71;
+} */
 
 .title {
     margin: 20px;
@@ -154,5 +154,12 @@ html {
 
     .input {
         border: 0;
+    }
+
+    .title {
+        position: absolute;
+        top: 10%;
+        z-index: 10;
+        background-image: linear-gradient(30deg, #fff, #fff, #fff);
     }
 }

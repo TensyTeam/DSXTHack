@@ -1,4 +1,5 @@
-export const address = '0x4283ffe1eF457E9004693e6f3a77c3b5E87c2515'
+export const address = '0xa15f5e75ce3f741c65f56370a5204067c8731a96'
+
 export const abi = [
 	{
 		"constant": false,
@@ -170,11 +171,6 @@ export const abi = [
 				"indexed": false,
 				"name": "price",
 				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"name": "count",
-				"type": "uint256"
 			}
 		],
 		"name": "MatchOffer",
@@ -242,3 +238,5 @@ export const abi = [
 		"type": "function"
 	}
 ]
+
+export default owner = '0xbE2D0109E4626B813980546B870CDaE4566CCa56'

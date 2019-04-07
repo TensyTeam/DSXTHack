@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { address, abi } from './sets'
+import { address, abi, owner } from './sets'
 
 
 export default class Ethereum extends React.Component {
@@ -32,7 +32,7 @@ export default class Ethereum extends React.Component {
 			})
 		}
 		
-		getTokens('0xbE2D0109E4626B813980546B870CDaE4566CCa56').then(res => {
+		getTokens(owner).then(res => {
 			console.log(res)
 		})
 	}

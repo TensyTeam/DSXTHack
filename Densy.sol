@@ -19,8 +19,8 @@ contract Densy {
     event MatchOffer (
         uint idIn,
         uint idOut,
-        uint price,
-        uint count
+        uint price
+        // uint count
     );
 
     struct Offer {
@@ -65,7 +65,9 @@ contract Densy {
     // way: true - продажа, false - покупка
     
     function addOffer(uint id, bool way, uint essence, uint count, uint price) public {
-        if (holdings[msg.sender][essence] >= count && price > 0) {
+        bool seller = !way || holdings[msg.sender][essence] >= count;
+        bool buyer = way || balances[msg.sender] >= price * count;
+        if (seller && buyer && price > 0) {
             offers[id] = Offer({
                 way: way,
                 owner: msg.sender,
@@ -74,10 +76,14 @@ contract Densy {
                 price: price
             });
 
-            // Замораживание активов, если на продажу
             if (way) {
+                // Замораживание активов, если на продажу
                 holdings[msg.sender][essence] -= count;
+            } else {
+                // Замораживание токенов, если на покупку (случай отмены транзакции)
+                balances[msg.sender] -= price * count;
             }
+
             
             // Логирование, для подтверждения наивыгоднейшего курса для тейкера
             emit CreateOffer(id, way, msg.sender, essence, count, price);
@@ -110,6 +116,9 @@ contract Densy {
         if (cond_in && cond_out && cond_access && cond_price) {
             uint price;
             uint count;
+
+            // Возврат замороженных средств
+            balances[ownerOut] += offers[idOut].price * offers[idOut].count;
 
             // Определение выгодного для тейкера курса
             // Инициатор функции - тейкер, все id упорядочены, т.е. id тейкера наибольший
@@ -154,7 +163,7 @@ contract Densy {
                 }
             
                 // Логирование, для подтверждения наивыгоднейшего курса для тейкера
-                emit MatchOffer(idIn, idOut, price, count);
+                emit MatchOffer(idIn, idOut, price); // , count
             }
         }
     }

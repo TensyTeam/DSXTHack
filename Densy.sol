@@ -7,6 +7,22 @@ contract Densy {
         notary = msg.sender; // Нотариус - распределение активов
     }
 
+    event CreateOffer (
+        uint id,
+        bool way,
+        address owner,
+        uint essence,
+        uint count,
+        uint price
+    );
+    
+    event MatchOffer (
+        uint idIn,
+        uint idOut,
+        uint price,
+        uint count
+    );
+
     struct Offer {
         bool way;
         address owner;
@@ -48,7 +64,7 @@ contract Densy {
     // Добавить предложение
     // way: true - продажа, false - покупка
     
-    function addOffer(bool way, uint id, uint essence, uint count, uint price) public {
+    function addOffer(uint id, bool way, uint essence, uint count, uint price) public {
         if (holdings[msg.sender][essence] >= count && price > 0) {
             offers[id] = Offer({
                 way: way,
@@ -62,6 +78,9 @@ contract Densy {
             if (way) {
                 holdings[msg.sender][essence] -= count;
             }
+            
+            // Логирование, для подтверждения наивыгоднейшего курса для тейкера
+            emit CreateOffer(id, way, msg.sender, essence, count, price);
         }
     }
 
@@ -93,6 +112,7 @@ contract Densy {
             uint count;
 
             // Определение выгодного для тейкера курса
+            // Инициатор функции - тейкер, все id упорядочены, т.е. id тейкера наибольший
 
             if (idIn > idOut) {
                 price = offers[idOut].price;
@@ -132,6 +152,9 @@ contract Densy {
                 if (offers[idOut].count == 0) {
                     delete offers[idOut];
                 }
+            
+                // Логирование, для подтверждения наивыгоднейшего курса для тейкера
+                emit MatchOffer(idIn, idOut, price, count);
             }
         }
     }
@@ -152,7 +175,7 @@ contract Densy {
 
     function getOffer(uint id) public view returns (uint) {
         if (msg.sender == owner) {
-            return offers[id].price;
+            return offers[id].count;
         }
     }
 }

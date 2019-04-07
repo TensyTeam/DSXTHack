@@ -1,40 +1,33 @@
 import React from 'react';
 
+import { getTokens, mintTokens } from './methods'
 import { address, abi, owner } from './sets'
 
 
 export default class Ethereum extends React.Component {
+    constructor (props) {
+		super(props)
+	}
+	
     componentDidMount() {
-		let web3 = window.web3
+		// let web3 = window.web3
 
-		if (typeof(web3) == 'undefined') {
-			return console.log("Metamask is not installed")
-		}
+		// if (typeof(web3) == 'undefined') {
+		// 	console.log("Metamask is not installed")
+		// }
 
-		let contract = web3.eth.contract(abi).at(address)
+		// let contract = web3.eth.contract(abi).at(address)
 
 		// console.log(web3);
 		// console.log(contract);
-
-		function getTokens(user) {
-			return new Promise(function(resolve, reject) {
-				contract.getTokens.call(
-					user,
-					{gasPrice: web3.toWei(8.1, 'Gwei'), gas: 3000000},
-					(err, res) => {
-						if (err) {
-							return console.log(err)
-						}
-						// console.log(res)
-						resolve(res.c[0])
-					}
-				)
-			})
-		}
 		
 		getTokens(owner).then(res => {
 			console.log(res)
 		})
+
+		// mintTokens(owner, 10).then(res => {
+		// 	console.log(res)
+		// })
 	}
 
 	render() {

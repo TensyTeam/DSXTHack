@@ -239,4 +239,4 @@ export const abi = [
 	}
 ]
 
-export default owner = '0xbE2D0109E4626B813980546B870CDaE4566CCa56'
+export const owner = '0xbE2D0109E4626B813980546B870CDaE4566CCa56'

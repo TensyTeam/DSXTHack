@@ -6,27 +6,43 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import am4themes_material from "@amcharts/amcharts4/themes/material";
 import Ethreum from './Ethereum'
 
+import { addOffer } from './methods'
+
+
 am4core.useTheme(am4themes_animated);
 
 class App extends React.Component {
     constructor (props) {
-		super(props);
+		super(props)
 		this.state = {
 			arrayOrders: null,
-            data: null,
+            id: null,
             name: 'usd',
             quantity: null,
             price: null,
             type: 'buy'
-		};
-		this.onSendOrder = this.onSendOrder.bind(this);
-		this.onAcceptOrder = this.onAcceptOrder.bind(this);
+		}
+		this.onSendOrder = this.onSendOrder.bind(this)
+        this.onAcceptOrder = this.onAcceptOrder.bind(this)
+        // this.types = {
+        //     'usd': 1,
+        //     'eur': 2,
+        //     'btc': 3,
+        // }
 	}
 
     onSendOrder() {
         if(this.state.quantity !== null && this.state.price !== null){
-    		this.setState({ data: serverResponse(sendOrder(this.state.name, this.state.quantity, this.state.price, this.state.type)) });
+            let data = serverResponse(sendOrder(this.state.name, this.state.quantity, this.state.price, this.state.type))
+            // this.setState({ id: data });
 
+            addOffer(data, this.state.type == 'sell', this.state.name, this.state.quantity, this.state.price).then(res => {
+                console.log(res)
+            })
+
+            // console.log(data, this.state.type == 'sell', this.state.name, this.state.quantity, this.state.price)
+
+            // addOffer(2, true, 2, 12, 50).then(res => console.log(res))
         }
 	}
 
@@ -105,15 +121,15 @@ class App extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Ethreum />
+                <Ethreum offerId={ this.state.id } />
                 <div className="general">
                     <div className="top">
                         <div className="form-order">
                             <div className="form">
                                 <select className="input" type="text" defaultValue="usd" name="name" placeholder="Наименование" onChange={(e)=>{this.setState({ name: e.target.value })}}>
-                                    <option value="usd">USD</option>
-                                    <option value="eur">EUR</option>
-                                    <option value="btc">BTC</option>
+                                    <option value="1">USD</option>
+                                    <option value="2">EUR</option>
+                                    <option value="3">BTC</option>
                                 </select>
                                 <input className="input" type="number" name="quantity" placeholder="Quantity" onChange={(e)=>{this.setState({ quantity: e.target.value })}} required />
                                 <input className="input" type="number" name="price" placeholder="Price" onChange={(e)=>{this.setState({ price: e.target.value })}} required />

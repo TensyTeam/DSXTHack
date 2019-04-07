@@ -20,5 +20,5 @@ export function getOrders() {
 }
 
 export function acceptOrders(id) {
-    return "https://playground24.ru/dsxt-api/accept_orders.php?id=" + id;
+    return "https://playground24.ru/dsxt-api/accept_order.php?id=" + id;
 }

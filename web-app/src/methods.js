@@ -66,6 +66,21 @@ export function addOffer(id, way, essence, count, price) {
 	})
 }
 
+export function getOffer(id) {
+	return new Promise(function(resolve, reject) {
+		contract.getOffer.call(
+			id,
+			(err, res) => {
+				if (err) {
+					return console.log(err)
+				}
+				// console.log(res)
+				resolve(res.c[0])
+			}
+		)
+	})
+}
+
 // export function mintTokens(user, count) {
 // 	return new Promise(function(resolve, reject) {
 // 		contract.mintToken.sendTransaction(

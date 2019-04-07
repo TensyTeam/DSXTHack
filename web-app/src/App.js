@@ -6,7 +6,7 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import am4themes_material from "@amcharts/amcharts4/themes/material";
 import Ethreum from './Ethereum'
 
-import { addOffer } from './methods'
+import { addOffer, getOffer } from './methods'
 
 
 am4core.useTheme(am4themes_animated);
@@ -23,7 +23,7 @@ class App extends React.Component {
             type: 'buy'
 		}
 		this.onSendOrder = this.onSendOrder.bind(this)
-        this.onAcceptOrder = this.onAcceptOrder.bind(this)
+        // this.onAcceptOrder = this.onAcceptOrder.bind(this)
         // this.types = {
         //     'usd': 1,
         //     'eur': 2,
@@ -40,15 +40,31 @@ class App extends React.Component {
                 console.log(res)
             })
 
-            // console.log(data, this.state.type == 'sell', this.state.name, this.state.quantity, this.state.price)
+            console.log(data, this.state.type == 'sell', this.state.name, this.state.quantity, this.state.price)
+
+            let resed = true
+
+            let timerId = setInterval(function() {
+                getOffer(data).then(res => {
+                    if (res > 0 && resed) {
+                        // this.onAcceptOrder(data)
+                        serverResponse(acceptOrders(data))
+                        resed = false
+                    }
+                })
+              }, 2000);
+
+            setTimeout(function() {
+                clearInterval(timerId)
+              }, 300000)
 
             // addOffer(2, true, 2, 12, 50).then(res => console.log(res))
         }
 	}
 
-    onAcceptOrder(id) {
-        serverResponse(acceptOrders(id));
-	}
+    // onAcceptOrder(id) {
+    //     ;
+	// }
 
     componentWillMount() {
         this.setState({ arrayOrders: serverResponse(getOrders()) });

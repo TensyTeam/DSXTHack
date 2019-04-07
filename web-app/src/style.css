@@ -11,15 +11,12 @@
 html {
     margin: 0;
     padding: 0;
-    background-color: #fff;
+    background-color: #f2f6fa;
     font-family: ProximaNova, sans-serif;
 }
 
 .general {
-    /* background: url(./img/logo.png); */
     background-size: contain;
-    height: 100vh;
-    width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,68 +24,61 @@ html {
 }
 
 .top {
+    margin-top: 50px;
     display: flex;
-    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
 }
 
-.bottom {
-    display: flex;
-    justify-content: center;
-}
-
-#chartdiv1, #chartdiv2 {
-    width: 600px;
-    height: 400px;
-    border: 2px solid #2fe8ff;
-    border-radius: 10px;
+#chartdiv1 {
+    width: 800px;
+    height: 500px;
+    border-right: 2px solid #1f2440;
+    border-left: 2px solid #1f2440;
+    border-radius: 0px;
     margin: 0 50px;
 }
 
-[role=scrollbar], [role=button] {
+/* [role=scrollbar], [role=button] {
     display: none !important;
     fill: #2fe8ff;
     stroke: #2fe8ff;
-}
-
-/* [role=menuitem] {
-    stroke-opacity: 1;
-    fill: #2ecc71;
-    fill-opacity: 1;
-    stroke: #2ecc71;
 } */
 
-.title {
-    margin: 20px;
-    font-weight: bold;
-    font-size: 30px;
-    text-transform: uppercase;
+table {
+    text-align: center;
+    width: 200px;
 }
 
-.gradient {
-    font-weight: bolder;
-    color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
-    position: relative;
+td {
+    padding: 5px;
 }
 
-.gradient_cold {
-    background-image: linear-gradient(30deg, #59bcc8, #5ae6f7, #0be4ff);
+.sell {
+    background-color: rgba(255, 81, 73, .15);
+    color: #c56a6a;
+}
+
+.buy {
+    background-color: rgba(81, 198, 124, .15);
+    color: #498f64;
 }
 
 .input {
+    background: #fff;
     font-family: ProximaNova, sans-serif;
     -webkit-text-fill-color: #787878;
     fill: #787878;
-    text-align: center;
     font-size: 18px;
     height: 40px;
+    box-sizing: border-box;
+    padding-left: 10px;
     line-height: 40px;
     margin-bottom: 15px;
-    min-width: 300px;
+    width: 200px;
     outline: 0px;
     border-radius: 3px;
-    border: 2px solid #2fe8ff;
+    border: 2px solid #f2f6fa;
 }
 
 .btn {
@@ -136,30 +126,28 @@ html {
     flex-direction: column;
 }
 
-@media (max-width: 800px) {
-    #chartdiv1, #chartdiv2 {
-        display: none;
-    }
+.legenda {
+    color: #000;
+}
 
-    .bottom {
-        background: #00000029;
-        padding: 1000px;
-        position: fixed;
+@media (max-width: 800px) {
+    #chartdiv1, .order {
+        display: none;
     }
 
     .general {
         background: url(./img/logo.png);
         position: fixed;
+        height: 100vh;
+        width: 100vw;
     }
 
     .input {
         border: 0;
     }
 
-    .title {
-        position: absolute;
-        top: 10%;
-        z-index: 10;
-        background-image: linear-gradient(30deg, #fff, #fff, #fff);
+    .top {
+        background: #000000aa;
+        padding: 1000px;
     }
 }

@@ -104,8 +104,8 @@ contract Densy {
         bool cond_out = !offers[idOut].way;
         // Вызывает инициатор?
         bool cond_access = access == msg.sender;
-        // Цена предложения меньше цены покупки?
-        bool cond_price = offers[idIn].price < offers[idOut].price;
+        // Цена предложения не больше цены покупки?
+        bool cond_price = offers[idIn].price <= offers[idOut].price;
 
         if (cond_in && cond_out && cond_access && cond_price) {
             uint price;

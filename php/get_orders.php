@@ -19,14 +19,14 @@
         }
 
         //get orders buy
-        $query_buy = mysqli_query($connect, "SELECT `id`, `date`, `time`, `name`, `quantity`, `price`, `type`  FROM `orders`  WHERE `type` = 'buy' AND `show` = 'true' ORDER BY `price`");
+        $query_buy = mysqli_query($connect, "SELECT `id`, `date`, `time`, `name`, `quantity`, `price`, `type`  FROM `orders`  WHERE `type` = 'buy' AND `show` = 'true' ORDER BY `price` DESC");
         while($data_buy = mysqli_fetch_array($query_buy)) {
             //push order buy
             array_push($json_orders_buy, array('id'=>$data_buy['id'],'date'=>$data_buy['date'],'time'=>$data_buy['time'],'name'=>$data_buy['name'],'quantity'=>$data_buy['quantity'],'price'=>$data_buy['price'],'type'=>$data_buy['type']));
         }
 
         //get orders sell
-        $query_sell = mysqli_query($connect, "SELECT `id`, `date`, `time`, `name`, `quantity`, `price`, `type`  FROM `orders` WHERE `type` = 'sell' AND `show` = 'true' ORDER BY `price`");
+        $query_sell = mysqli_query($connect, "SELECT `id`, `date`, `time`, `name`, `quantity`, `price`, `type`  FROM `orders` WHERE `type` = 'sell' AND `show` = 'true' ORDER BY `price` DESC");
         while($data_sell = mysqli_fetch_array($query_sell)) {
             //push order sell
             array_push($json_orders_sell, array('id'=>$data_sell['id'],'date'=>$data_sell['date'],'time'=>$data_sell['time'],'name'=>$data_sell['name'],'quantity'=>$data_sell['quantity'],'price'=>$data_sell['price'],'type'=>$data_sell['type']));

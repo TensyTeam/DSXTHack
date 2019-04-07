@@ -135,7 +135,7 @@ class App extends React.Component {
 
         let chart2 = am4core.create("chartdiv2", am4charts.XYChart);
 
-        // chart2.data = data;
+        chart2.data = data;
         chart2.bottomAxesContainer.layout = "horizontal";
         chart2.bottomAxesContainer.reverseOrder = true;
 
@@ -155,9 +155,9 @@ class App extends React.Component {
         valueAxis2.renderer.grid.template.stroke = interfaceColors.getFor("background");
         valueAxis2.renderer.grid.template.strokeOpacity = 1;
 
-        chart2.colors.list = [
-            am4core.color("#000")
-        ];
+        // chart2.colors.list = [
+        //     am4core.color("#000")
+        // ];
 
 
         let series2 = chart2.series.push(new am4charts.ColumnSeries());
@@ -165,7 +165,28 @@ class App extends React.Component {
         series2.dataFields.valueX = "value";
         series2.xAxis = valueAxis2;
         series2.name = "Series";
-                series2.data = data;
+
+        series2.heatRules.push({
+            "target": series2.columns.template,
+            "property": "fill",
+            "min": am4core.color("#2ecc71"),
+            "max": am4core.color("#e74c3c"),
+            "dataField": "valueX"
+        });
+
+        let series3 = chart2.series.push(new am4charts.ColumnSeries());
+        series3.dataFields.categoryY = "category";
+        series3.dataFields.valueX = "value";
+        series3.xAxis = valueAxis2;
+        series3.name = "Series";
+
+        series2.heatRules.push({
+            "target": series2.columns.template,
+            "property": "fill",
+            "min": am4core.color("#2ecc71"),
+            "max": am4core.color("#e74c3c"),
+            "dataField": "valueX"
+        });
 
         // series2.stroke = am4core.color("{valueX.value}");
         // series2.columns.template.fill = am4core.color("#00ff00");

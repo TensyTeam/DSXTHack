@@ -20,7 +20,8 @@ class App extends React.Component {
             name: 'usd',
             quantity: null,
             price: null,
-            type: 'buy'
+            type: 'buy',
+            status: ''
 		}
 		this.onSendOrder = this.onSendOrder.bind(this)
 	}
@@ -40,8 +41,10 @@ class App extends React.Component {
             let timerId = setInterval(function() {
                 getOffer(data).then(res => {
                     if (res > 0 && resed) {
-                        // this.onAcceptOrder(data)
+                        // this.setState({ status: serverResponse(acceptOrders(data)), arrayOrders: serverResponse(getOrders()) });
                         serverResponse(acceptOrders(data))
+                        document.getElementById('status').innerHTML = 'Success'
+                        document.location.reload(true);
                         resed = false
                     }
                 })
@@ -131,6 +134,7 @@ class App extends React.Component {
                     <div className="top">
                         <div className="form-order">
                             <div className="form">
+                                <div id="status"></div>
                                 <select className="input" type="text" defaultValue="usd" name="name" placeholder="Наименование" onChange={(e)=>{this.setState({ name: e.target.value })}}>
                                     <option value="1">USD</option>
                                     <option value="2">EUR</option>

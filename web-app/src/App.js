@@ -6,7 +6,7 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import am4themes_material from "@amcharts/amcharts4/themes/material";
 import Ethreum from './Ethereum'
 
-import { addOffer, getOffer } from './methods'
+import { addOffer, getOffer, swapOffer } from './methods'
 
 
 am4core.useTheme(am4themes_animated);
@@ -17,7 +17,7 @@ class App extends React.Component {
 		this.state = {
 			arrayOrders: null,
             id: null,
-            name: 'usd',
+            name: 1,
             quantity: null,
             price: null,
             type: 'buy',
@@ -30,19 +30,33 @@ class App extends React.Component {
         if(this.state.quantity !== null && this.state.price !== null){
             let data = serverResponse(sendOrder(this.state.name, this.state.quantity, this.state.price, this.state.type))
 
-            addOffer(data, this.state.type == 'sell', this.state.name, this.state.quantity, this.state.price).then(res => {
+            // let re = data[0]
+            // console.log(re)
+
+            addOffer(data[0], this.state.type == 'sell', this.state.name+0, this.state.quantity+0, this.state.price).then(res => {
                 console.log(res)
             })
 
-            console.log(data, this.state.type == 'sell', this.state.name, this.state.quantity, this.state.price)
+            console.log(data, this.state.type == 'sell', this.state.name, this.state.quantity+0, this.state.price+0)
+
+
+            //
+
+            if (data[1]) {
+                swapOffer(data[0], data[1]).then(res => {
+                    console.log(res)
+                })
+            }
+
+            //
 
             let resed = true
 
             let timerId = setInterval(function() {
-                getOffer(data).then(res => {
+                getOffer(data[0]).then(res => {
                     if (res > 0 && resed) {
                         // this.setState({ status: serverResponse(acceptOrders(data)), arrayOrders: serverResponse(getOrders()) });
-                        serverResponse(acceptOrders(data))
+                        serverResponse(acceptOrders(data[0]))
                         document.getElementById('status').innerHTML = 'Success'
                         document.location.reload(true);
                         resed = false

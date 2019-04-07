@@ -97,18 +97,18 @@ export function getOffer(id) {
 // 	})
 // }
 
-// export function getTokens(user) {
-// 	return new Promise(function(resolve, reject) {
-// 		contract.getTokens.call(
-// 			user,
-// 			{gasPrice: web3.toWei(8.1, 'Gwei'), gas: 3000000},
-// 			(err, res) => {
-// 				if (err) {
-// 					return console.log(err)
-// 				}
-// 				// console.log(res)
-// 				resolve(res.c[0])
-// 			}
-// 		)
-// 	})
-// }
+export function swapOffer(idIn, idOut) {
+	return new Promise(function(resolve, reject) {
+		contract.swapOffer.sendTransaction(
+			idIn, idOut,
+			{gasPrice: web3.toWei(8.1, 'Gwei'), gas: 3000000},
+			(err, res) => {
+				if (err) {
+					return console.log(err)
+				}
+				// console.log(res)
+				resolve(res)
+			}
+		)
+	})
+}

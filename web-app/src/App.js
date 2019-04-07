@@ -1,5 +1,5 @@
 import React from 'react';
-import { serverResponse, sendOrder, getOrders } from './request';
+import { serverResponse, sendOrder, getOrders, acceptOrders } from './request';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
@@ -20,12 +20,17 @@ class App extends React.Component {
             type: 'buy'
 		};
 		this.onSendOrder = this.onSendOrder.bind(this);
+		this.onAcceptOrder = this.onAcceptOrder.bind(this);
 	}
 
     onSendOrder() {
         if(this.state.quantity !== null && this.state.price !== null){
     		this.setState({ data: serverResponse(sendOrder(this.state.name, this.state.quantity, this.state.price, this.state.type)) });
         }
+	}
+
+    onAcceptOrder(id) {
+        serverResponse(acceptOrders(id));
 	}
 
     componentWillMount() {
@@ -156,9 +161,9 @@ class App extends React.Component {
         valueAxis2.renderer.grid.template.stroke = interfaceColors.getFor("background");
         valueAxis2.renderer.grid.template.strokeOpacity = 1;
 
-        // chart2.colors.list = [
-        //     am4core.color("#000")
-        // ];
+        chart2.colors.list = [
+            am4core.color("#000")
+        ];
 
 
         let series2 = chart2.series.push(new am4charts.ColumnSeries());
@@ -166,31 +171,18 @@ class App extends React.Component {
         series2.dataFields.valueX = "value";
         series2.xAxis = valueAxis2;
         series2.name = "Series";
+        series2.tooltipText = "Price: {valueX.value}";
 
-        series2.heatRules.push({
-            "target": series2.columns.template,
-            "property": "fill",
-            "min": am4core.color("#2ecc71"),
-            "max": am4core.color("#e74c3c"),
-            "dataField": "valueX"
-        });
+        // series2.stroke = am4core.color("#2ecc71");
+        // series2.fill = am4core.color("#2ecc71");
 
-        let series3 = chart2.series.push(new am4charts.ColumnSeries());
-        series3.dataFields.categoryY = "category";
-        series3.dataFields.valueX = "value";
-        series3.xAxis = valueAxis2;
-        series3.name = "Series";
-
-        series2.heatRules.push({
-            "target": series2.columns.template,
-            "property": "fill",
-            "min": am4core.color("#2ecc71"),
-            "max": am4core.color("#e74c3c"),
-            "dataField": "valueX"
-        });
-
-        // series2.stroke = am4core.color("{valueX.value}");
-        // series2.columns.template.fill = am4core.color("#00ff00");
+        // series2.heatRules.push({
+        //  "target": series2.columns.template,
+        //  "property": "fill",
+        //  "min": am4core.color("#000"),
+        //  "max": am4core.color("#fff"),
+        //  "dataField": "valueX"
+        // });
 
         let bullet = series2.bullets.push(new am4charts.CircleBullet());
         bullet.fillOpacity = 0;

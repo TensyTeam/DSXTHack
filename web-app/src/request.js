@@ -11,6 +11,10 @@ export function serverResponse(urlRequest) {
     }
 }
 
-export function sendOrder(value, name) {
-    return "https://playground24.ru/dsxt-api/get_data.php?value=" + value + "&name=" + name;
+export function sendOrder(name, quantity, price, type) {
+    return "https://playground24.ru/dsxt-api/send_order.php?name=" + name + "&quantity=" + quantity + "&price=" + price + "&type=" + type;
+}
+
+export function getOrders() {
+    return "https://playground24.ru/dsxt-api/get_orders.php?request=true";
 }

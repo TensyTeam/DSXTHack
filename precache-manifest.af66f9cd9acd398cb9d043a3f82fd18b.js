@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "d7331abc44dd1dd70669",
-    "url": "/DSXTHack/static/js/5.2b4219d0.chunk.js"
+    "revision": "486fb38ca7010bfd11a9",
+    "url": "/DSXTHack/static/css/main.40592c79.chunk.css"
   },
   {
-    "revision": "0e59f43df59ff5a86eae",
-    "url": "/DSXTHack/static/css/main.989b3656.chunk.css"
+    "revision": "486fb38ca7010bfd11a9",
+    "url": "/DSXTHack/static/js/main.034acc98.chunk.js"
   },
   {
     "revision": "7bd43c3b86608c6a23a0",
@@ -24,8 +24,8 @@ self.__precacheManifest = [
     "url": "/DSXTHack/static/js/4.400023c0.chunk.js"
   },
   {
-    "revision": "0e59f43df59ff5a86eae",
-    "url": "/DSXTHack/static/js/main.120b19be.chunk.js"
+    "revision": "d7331abc44dd1dd70669",
+    "url": "/DSXTHack/static/js/5.2b4219d0.chunk.js"
   },
   {
     "revision": "2952455f78dc6abccd1c",
@@ -48,7 +48,7 @@ self.__precacheManifest = [
     "url": "/DSXTHack/static/media/ProximaNova.1250c31d.eot"
   },
   {
-    "revision": "fa01dadadf67a352ad91955894e41415",
+    "revision": "6c039e1b459241f9080f03ae5f3c5880",
     "url": "/DSXTHack/index.html"
   }
 ];

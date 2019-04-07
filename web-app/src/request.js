@@ -18,3 +18,7 @@ export function sendOrder(name, quantity, price, type) {
 export function getOrders() {
     return "https://playground24.ru/dsxt-api/get_orders.php?request=true";
 }
+
+export function acceptOrders(id) {
+    return "https://playground24.ru/dsxt-api/accept_orders.php?id=" + id;
+}

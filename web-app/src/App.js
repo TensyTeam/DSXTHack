@@ -23,18 +23,11 @@ class App extends React.Component {
             type: 'buy'
 		}
 		this.onSendOrder = this.onSendOrder.bind(this)
-        // this.onAcceptOrder = this.onAcceptOrder.bind(this)
-        // this.types = {
-        //     'usd': 1,
-        //     'eur': 2,
-        //     'btc': 3,
-        // }
 	}
 
     onSendOrder() {
         if(this.state.quantity !== null && this.state.price !== null){
             let data = serverResponse(sendOrder(this.state.name, this.state.quantity, this.state.price, this.state.type))
-            // this.setState({ id: data });
 
             addOffer(data, this.state.type == 'sell', this.state.name, this.state.quantity, this.state.price).then(res => {
                 console.log(res)
@@ -61,10 +54,6 @@ class App extends React.Component {
             // addOffer(2, true, 2, 12, 50).then(res => console.log(res))
         }
 	}
-
-    // onAcceptOrder(id) {
-    //     ;
-	// }
 
     componentWillMount() {
         this.setState({ arrayOrders: serverResponse(getOrders()) });

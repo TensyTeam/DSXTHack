@@ -42,11 +42,11 @@ class App extends React.Component {
 
             //
 
-            if (data[1]) {
-                swapOffer(data[0], data[1]).then(res => {
-                    console.log(res)
-                })
-            }
+            // if (data[1]) {
+            //     swapOffer(data[0], data[1]).then(res => {
+            //         console.log(res)
+            //     })
+            // }
 
             //
 

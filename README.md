@@ -2,4 +2,4 @@
 
 ### DSXT blockchain hackathon
 
-Open web-app: https://mike-petrov.github.io/DSXTHack/
+Open web-app: https://tensy.github.io/DSXTHack/
